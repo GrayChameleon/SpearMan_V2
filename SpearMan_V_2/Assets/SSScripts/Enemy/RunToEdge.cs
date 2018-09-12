@@ -10,12 +10,16 @@ public class RunToEdge : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.gameObject.GetComponentInParent<Enemy>();
-
     }
 
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (animator.GetBool("Run")==true)
+        {
+            animator.ResetTrigger("Run");
+        }
+
 
         enemy.RunToEdge();
         if (enemy.CanMoveForward() == false)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IdamageAble
 {
     public Rigidbody2D rb2D;
     public float walkSpeed;
@@ -29,6 +29,8 @@ public class Enemy : MonoBehaviour
     public float relodTime;
     float relodTimeValue;
 
+    public float hp;
+    public float damage;
 
     // Use this for initialization
     void Start()
@@ -145,7 +147,16 @@ public class Enemy : MonoBehaviour
     {
         spear = Instantiate<GameObject>(spearPrefab, spearSpawnPoint.position, Quaternion.identity);
         spear.GetComponent<spear>().direction = faceingDirection;
+        spear.GetComponent<spear>().spearDamage = damage;
         restRelTime();
     }
 
+    public void takeDamage(float damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            Debug.Log("dead");
+        }
+    }
 }

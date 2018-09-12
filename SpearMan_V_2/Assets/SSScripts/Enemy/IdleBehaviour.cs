@@ -17,6 +17,7 @@ public class IdleBehaviour : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("Run");
+        animator.ResetTrigger("Attack");
 
         if (enemy.canAttackPlayer() && enemy.relodTime <= 0)
         {

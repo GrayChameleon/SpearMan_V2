@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControler : MonoBehaviour
+public class PlayerControler : MonoBehaviour, IdamageAble
 {
 
     float AxisHor;
@@ -16,6 +16,9 @@ public class PlayerControler : MonoBehaviour
     float checkRadius = 0.4f;
     public LayerMask whatIsGround;
     public Animator playerAnimator;
+
+    public float hp;
+    public float damage;
 
 
     int faceingDir = 1; //he's faceing right
@@ -58,7 +61,7 @@ public class PlayerControler : MonoBehaviour
             jump();
         }
 
-        if (Input.GetKeyDown(KeyCode.X)||Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(KeyCode.X) || Input.GetButtonDown("Fire1"))
         {
             throwSpear();
         }
@@ -86,6 +89,7 @@ public class PlayerControler : MonoBehaviour
     {
         spear = Instantiate<GameObject>(spearPrefab, spearSpawnPoint.position, Quaternion.identity);
         spear.GetComponent<spear>().direction = faceingDir;
+        spear.GetComponent<spear>().spearDamage = damage;
     }
 
     void jump()
@@ -94,10 +98,12 @@ public class PlayerControler : MonoBehaviour
         isGrounded = false;
     }
 
-
-
-
-
-
-
+    public void takeDamage(float damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            Debug.Log("dead");
+        }
+    }
 }
