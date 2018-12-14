@@ -31,15 +31,19 @@ public class spear : MonoBehaviour
 
     private void FixedUpdate()
     {
-        x_Vel = Mathf.Sqrt(speed*speed - rb2D.velocity.y*rb2D.velocity.y);
+        x_Vel = Mathf.Sqrt(speed * speed - rb2D.velocity.y * rb2D.velocity.y);
         angle = Mathf.Atan(rb2D.velocity.y / x_Vel) * 180 / Mathf.PI;
         rb2D.velocity = new Vector2(x_Vel * direction, rb2D.velocity.y);
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y , angle);
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, angle);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<IdamageAble>() != null)
+        if (collision.gameObject.tag == "Shield")
+        {
+
+        }
+        else if (collision.gameObject.GetComponent<IdamageAble>() != null)
         {
             collision.gameObject.GetComponent<IdamageAble>().takeDamage(spearDamage);
         }

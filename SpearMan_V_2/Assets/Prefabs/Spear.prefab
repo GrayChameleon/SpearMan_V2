@@ -83,7 +83,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   direction: 0
-  startY_Vel: 3
+  startY_Vel: 2
   spearDamage: 0
 --- !u!212 &212140044615630002
 SpriteRenderer:

@@ -27,6 +27,18 @@ public class PlayerControler : MonoBehaviour, IdamageAble
     public GameObject spearPrefab;
     GameObject spear;
 
+    public GameObject shield;
+    public float shieldSpeedToSpeedRatio;
+
+    public GameObject hook;
+    public HingeJoint2D rope;
+    JointMotor2D motor2D;
+    bool isSwinging = false;
+    public float swingSpeed;
+
+
+
+    [Range(0f, 5f)] public float wallColliderOffset;
 
     private void Start()
     {
@@ -56,22 +68,72 @@ public class PlayerControler : MonoBehaviour, IdamageAble
 
         playerAnimator.SetFloat("speed", AxisHor * speed);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && (isGrounded || isSwinging))
         {
             jump();
         }
 
-        if (Input.GetKeyDown(KeyCode.X) || Input.GetButtonDown("Fire1"))
+        if ((Input.GetKeyDown(KeyCode.X) || Input.GetButtonDown("Fire1")) && Input.GetKey(KeyCode.C) == false)
         {
             throwSpear();
         }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            activeShield(true);
+            speed *= shieldSpeedToSpeedRatio;
+        }
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            activeShield(false);
+            speed /= shieldSpeedToSpeedRatio;
+        }
+        if (Input.GetKeyDown(KeyCode.Z) && isGrounded == false)
+        {
+            throwHook();
+        }
+        Debug.DrawLine(transform.position, hook.GetComponent<GraplingHook>().nearestGrabPlace.transform.position);
     }
 
     private void FixedUpdate()
     {
-        rb2D.velocity = new Vector2(AxisHor * speed, rb2D.velocity.y);
+
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+        if (isGrounded)
+        {
+            isSwinging = false;
+        }
+
+        if (Physics2D.BoxCast(transform.position, new Vector2(0f + wallColliderOffset, 1f + wallColliderOffset), 0, new Vector2(faceingDir, 0), wallColliderOffset, whatIsGround) == true)
+        {
+            //potensial wall jump implementatotion
+        }
+
+        else
+        {
+            if (isSwinging)
+            {
+                //swingMovement();
+            }
+            else
+            {
+                movement();
+            }
+        }
+
+
+        falling();
+
+    }
+
+    void movement()
+    {
+        rb2D.velocity = new Vector2(AxisHor * speed, rb2D.velocity.y);
+    }
+
+    void falling()
+    {
 
         if (rb2D.velocity.y < -3f)
         { isFalling = true; }
@@ -85,6 +147,16 @@ public class PlayerControler : MonoBehaviour, IdamageAble
 
     }
 
+    void swingMovement()
+    {
+
+        motor2D.motorSpeed = -AxisHor * swingSpeed;
+        motor2D.maxMotorTorque = rope.motor.maxMotorTorque;
+        rope.motor = motor2D;
+
+
+    }
+
     void throwSpear()
     {
         spear = Instantiate<GameObject>(spearPrefab, spearSpawnPoint.position, Quaternion.identity);
@@ -95,7 +167,15 @@ public class PlayerControler : MonoBehaviour, IdamageAble
     void jump()
     {
         rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
-        isGrounded = false;
+        if (isSwinging)
+        {
+            stopSwinging();
+        }
+    }
+
+    void activeShield(bool active)
+    {
+        shield.SetActive(active);
     }
 
     public void takeDamage(float damage)
@@ -105,5 +185,20 @@ public class PlayerControler : MonoBehaviour, IdamageAble
         {
             Debug.Log("dead");
         }
+    }
+
+    void throwHook()
+    {
+        hook.GetComponent<GraplingHook>().findNearestGrabPlace();
+        rope.anchor = hook.GetComponent<GraplingHook>().nearestGrabPlace.transform.position - transform.position;
+        rope.connectedAnchor = hook.GetComponent<GraplingHook>().nearestGrabPlace.transform.position;
+        isSwinging = true;
+        rope.enabled = true;
+    }
+
+    void stopSwinging()
+    {
+        isSwinging = false;
+        rope.enabled = false;
     }
 }

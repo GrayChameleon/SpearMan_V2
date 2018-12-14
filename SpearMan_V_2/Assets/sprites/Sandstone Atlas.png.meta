@@ -20,7 +20,16 @@ TextureImporter:
     21300030: Sandstone Atlas_15
     21300032: Sandstone Atlas_16
     21300034: Sandstone Atlas_17
-    21300036: Sandstone Atlas_18
+    21300036: GraplingPlace
+    21300038: Sandstone Atlas_0
+    21300040: Sandstone Atlas_1
+    21300042: Sandstone Atlas_2
+    21300044: Sandstone Atlas_3
+    21300046: Sandstone Atlas_19
+    21300048: Sandstone Atlas_18
+    21300050: Sandstone Atlas_20
+    21300052: Sandstone Atlas_21
+    21300054: Sandstone Atlas_22
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -114,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bush_dry
+      name: Sandstone Atlas_0
       rect:
         serializedVersion: 2
         x: 0
@@ -122,19 +131,19 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22e7c70622c379e4ab607ac5370d5041
+      spriteID: 5603be00722b7b9458c13cb4ca636fd3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stars_Right
+      name: Sandstone Atlas_1
       rect:
         serializedVersion: 2
         x: 16
@@ -142,19 +151,19 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f13a1c568b793e4395aa8809171f609
+      spriteID: 400f42905b2c2be468b396478d2b4d28
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Floar
+      name: Sandstone Atlas_2
       rect:
         serializedVersion: 2
         x: 32
@@ -162,19 +171,19 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7c9d1dc69c09c34190161ae4416c0c8
+      spriteID: 1426374b7988b8e4ea3195c40ccd5126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stars_left
+      name: Sandstone Atlas_3
       rect:
         serializedVersion: 2
         x: 48
@@ -182,13 +191,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af6e23db1a0144d47beb5f6463c2c443
+      spriteID: c48277b6337088242986460d4e9c2e8e
       vertices: []
       indices: 
       edges: []
@@ -202,13 +211,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb7f6f0aa2c576046aa6963b667120d5
+      spriteID: df7b5f2a0aa6ef9498142aa821f20516
       vertices: []
       indices: 
       edges: []
@@ -222,13 +231,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 968c06bdd3820e645bf9a447e676e861
+      spriteID: 494ca741380df304d9b6077e7f6e98d1
       vertices: []
       indices: 
       edges: []
@@ -242,13 +251,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a9bfeb459f04264d9839928414e7c0e
+      spriteID: 353e1d781b0985f4f8e82f2d091187c7
       vertices: []
       indices: 
       edges: []
@@ -262,13 +271,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5c6ac73d688b6846a7be897dc03993d
+      spriteID: f922bd9ebff180b4c8bfc5f79563be16
       vertices: []
       indices: 
       edges: []
@@ -282,13 +291,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0366156543decd24e9c75c4d4000c4d3
+      spriteID: 5b7a44c40e63423419e27b7857516ba2
       vertices: []
       indices: 
       edges: []
@@ -302,13 +311,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c07a9c98e522e2f41be3bfd881dec2e3
+      spriteID: 51cc37eb476569d46bc57eecd82064f8
       vertices: []
       indices: 
       edges: []
@@ -322,13 +331,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e67b94855dc645b409c449e24605d637
+      spriteID: ade24c97e5418b740932411a9eb462c9
       vertices: []
       indices: 
       edges: []
@@ -342,13 +351,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a6cdb49b46b1b94da37dc9d5aaba285
+      spriteID: a6bd921093236284fb946b6edae201b9
       vertices: []
       indices: 
       edges: []
@@ -362,13 +371,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5a17e0f0ce284242957ce3a72763e70
+      spriteID: fafd5ae416b28084797740d41668f01d
       vertices: []
       indices: 
       edges: []
@@ -382,20 +391,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -4, y: -2}
-        - {x: -4, y: -6}
-        - {x: 1, y: -6}
-        - {x: 1, y: -2}
-        - {x: 8, y: -2}
-        - {x: 8, y: 2}
-        - {x: -8, y: 2}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca2bb82bcef737b44b290d793dc46a91
+      spriteID: 6c702ca22237ebe4aa2fd284757a48a7
       vertices: []
       indices: 
       edges: []
@@ -409,21 +411,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: 2}
-        - {x: -8, y: -2}
-        - {x: -2, y: -2}
-        - {x: -2, y: -6}
-        - {x: 3, y: -6}
-        - {x: 3, y: -2}
-        - {x: 8, y: -2}
-        - {x: 8, y: 2}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 166832575bf20a74e8bddf4ea7a23b92
+      spriteID: 47bd08d2f3dd8ef49bc7a0cf0f5459f4
       vertices: []
       indices: 
       edges: []
@@ -437,20 +431,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: -2}
-        - {x: 0, y: -2}
-        - {x: 0, y: -6}
-        - {x: 5, y: -6}
-        - {x: 5, y: -1}
-        - {x: 8, y: 2}
-        - {x: -8, y: 2}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c411b94d14ffbe74a88844f4dd919228
+      spriteID: b21f0f86c2f50d04ea0e1a2d589ebd66
       vertices: []
       indices: 
       edges: []
@@ -464,13 +451,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a528bf26b17cb054da2e94903abb428f
+      spriteID: 3e543877d7c8e3446ae315c2695d505b
       vertices: []
       indices: 
       edges: []
@@ -484,13 +471,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3201efbd82667d34880dd89178a22252
+      spriteID: e4f1cf58ff7b4db41bfac5c0f7f5cf5f
       vertices: []
       indices: 
       edges: []
@@ -499,18 +486,98 @@ TextureImporter:
       name: Sandstone Atlas_18
       rect:
         serializedVersion: 2
-        x: 80
+        x: 0
         y: 192
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b10a189cdc309994e8178569406433eb
+      spriteID: 03a477b6bf77a0f47b6406d1e6816fa0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandstone Atlas_19
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1fa659ed1a085c4084d9f4fabd18df7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandstone Atlas_20
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ff0ef1fb340bd84e9ead556b8f6af79
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandstone Atlas_21
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3b9a706e32e20a46a1370c6faaa0899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandstone Atlas_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a2603e4c89ba1e4abf8786eefaaaa93
       vertices: []
       indices: 
       edges: []

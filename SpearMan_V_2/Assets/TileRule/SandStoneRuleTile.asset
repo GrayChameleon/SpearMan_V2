@@ -16,7 +16,7 @@ MonoBehaviour:
   m_TilingRules:
   - m_Neighbors: 0000000002000000000000000100000001000000000000000100000000000000
     m_Sprites:
-    - {fileID: 21300004, guid: 11ecbb557a307fa4aa3c22c66bdbd1fb, type: 3}
+    - {fileID: 21300042, guid: 11ecbb557a307fa4aa3c22c66bdbd1fb, type: 3}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5
     m_RuleTransform: 0
