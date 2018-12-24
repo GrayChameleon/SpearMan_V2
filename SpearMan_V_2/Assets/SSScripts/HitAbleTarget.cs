@@ -29,7 +29,7 @@ public class HitAbleTarget : MonoBehaviour, ILever
             }
             else
             {
-                Debug.Log("fuckup");
+                SthToOpen.GetComponentInChildren<IOpenable>().open(true);
             }
         }
     }

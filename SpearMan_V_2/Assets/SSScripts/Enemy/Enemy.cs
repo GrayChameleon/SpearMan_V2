@@ -156,7 +156,7 @@ public class Enemy : MonoBehaviour, IdamageAble
         hp -= damage;
         if (hp <= 0)
         {
-            Debug.Log("dead");
+            Destroy(this.gameObject);
         }
     }
 }

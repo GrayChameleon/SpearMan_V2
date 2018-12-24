@@ -37,6 +37,8 @@ public class PlayerControler : MonoBehaviour, IdamageAble
     public float swingSpeed;
 
 
+    public SpriteRenderer playerSprite;
+    
 
     [Range(0f, 5f)] public float wallColliderOffset;
 
@@ -47,27 +49,43 @@ public class PlayerControler : MonoBehaviour, IdamageAble
 
     private void Update()
     {
+
         AxisHor = Input.GetAxis("Horizontal");
-        if (AxisHor < 0)
+        if (isSwinging)
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-            playerAnimator.SetBool("isMoveing", true);
-            faceingDir = -1;
+            if (AxisHor < 0)
+            {
+                playerSprite.transform.localEulerAngles = new Vector3(0, 180, 0);
+            }
+            else if (AxisHor > 0)
+            {
+                playerSprite.transform.localEulerAngles = new Vector3(0, 0, 0);
+            }
+      
+      
         }
-        else if (AxisHor > 0)
+        else
         {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-            playerAnimator.SetBool("isMoveing", true);
-            faceingDir = 1;
-        }
-        if (Input.GetAxisRaw("Horizontal") == 0)
-        {
-            AxisHor = 0;
-            playerAnimator.SetBool("isMoveing", false);
-        }
+            if (AxisHor < 0)
+            {
+                transform.eulerAngles = new Vector3(0, 180, transform.eulerAngles.z);
+                playerAnimator.SetBool("isMoveing", true);
+                faceingDir = -1;
+            }
+            else if (AxisHor > 0)
+            {
+                transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
+                playerAnimator.SetBool("isMoveing", true);
+                faceingDir = 1;
+            }
+            if (Input.GetAxisRaw("Horizontal") == 0)
+            {
+                AxisHor = 0;
+                playerAnimator.SetBool("isMoveing", false);
+            }
 
-        playerAnimator.SetFloat("speed", AxisHor * speed);
-
+            playerAnimator.SetFloat("speed", AxisHor * speed);
+        }
         if (Input.GetButtonDown("Jump") && (isGrounded || isSwinging))
         {
             jump();
@@ -88,7 +106,7 @@ public class PlayerControler : MonoBehaviour, IdamageAble
             activeShield(false);
             speed /= shieldSpeedToSpeedRatio;
         }
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded == false)
+        if (Input.GetKeyDown(KeyCode.Z) && isGrounded == false && isSwinging == false)
         {
             throwHook();
         }
@@ -102,7 +120,7 @@ public class PlayerControler : MonoBehaviour, IdamageAble
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
         if (isGrounded)
         {
-            isSwinging = false;
+            stopSwinging();
         }
 
         if (Physics2D.BoxCast(transform.position, new Vector2(0f + wallColliderOffset, 1f + wallColliderOffset), 0, new Vector2(faceingDir, 0), wallColliderOffset, whatIsGround) == true)
@@ -115,6 +133,7 @@ public class PlayerControler : MonoBehaviour, IdamageAble
             if (isSwinging)
             {
                 //swingMovement();
+                // playerSprite.transform.eulerAngles = new Vector3(playerSprite.transform.eulerAngles.x, playerSprite.transform.eulerAngles.y, Mathf.Atan((rope.anchor.x / rope.anchor.y)) * 180 / Mathf.PI);
             }
             else
             {
@@ -184,21 +203,38 @@ public class PlayerControler : MonoBehaviour, IdamageAble
         if (hp <= 0)
         {
             Debug.Log("dead");
+            Destroy(this.gameObject);
         }
     }
 
     void throwHook()
     {
         hook.GetComponent<GraplingHook>().findNearestGrabPlace();
-        rope.anchor = hook.GetComponent<GraplingHook>().nearestGrabPlace.transform.position - transform.position;
         rope.connectedAnchor = hook.GetComponent<GraplingHook>().nearestGrabPlace.transform.position;
+        rope.anchor = hook.GetComponent<GraplingHook>().nearestGrabPlace.transform.position - transform.position;
+
+
+
+        startSwinging();
+    }
+
+    void startSwinging()
+    {
+        // here set rotation (head point grapplac
+        rb2D.freezeRotation = false;
+        playerSprite.transform.localEulerAngles = new Vector3(0, transform.eulerAngles.y);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, Mathf.Atan((rope.anchor.x / rope.anchor.y)) * -180 / Mathf.PI);
+        Time.timeScale = 0.02f;
         isSwinging = true;
         rope.enabled = true;
     }
+
 
     void stopSwinging()
     {
         isSwinging = false;
         rope.enabled = false;
+        rb2D.freezeRotation = true;
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
     }
 }
