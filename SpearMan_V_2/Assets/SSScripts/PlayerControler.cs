@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControler : MonoBehaviour, IdamageAble
 {
 
-    float AxisHor;
+    Vector2 AxisInput;
     [Range(10, 20)] public float speed;
     public float jumpForce;
     public Rigidbody2D rb2D;
@@ -31,14 +31,13 @@ public class PlayerControler : MonoBehaviour, IdamageAble
     public float shieldSpeedToSpeedRatio;
 
     public GameObject hook;
-    public HingeJoint2D rope;
-    JointMotor2D motor2D;
+    public DistanceJoint2D rope;
     bool isSwinging = false;
-    public float swingSpeed;
-
-
+    public float swingForse;
+    public float swingBreakingForse;
+    public float ropeClimbSpeed;
     public SpriteRenderer playerSprite;
-    
+
 
     [Range(0f, 5f)] public float wallColliderOffset;
 
@@ -50,29 +49,35 @@ public class PlayerControler : MonoBehaviour, IdamageAble
     private void Update()
     {
 
-        AxisHor = Input.GetAxis("Horizontal");
+        AxisInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         if (isSwinging)
         {
-            if (AxisHor < 0)
+            //swing animation control
+            if (AxisInput.x < 0)
             {
-                playerSprite.transform.localEulerAngles = new Vector3(0, 180, 0);
+                transform.eulerAngles = new Vector3(0, 180, -1 * Mathf.Asin((transform.position.x - rope.connectedAnchor.x) / rope.distance) * 180f / Mathf.PI);
+                faceingDir = -1;
             }
-            else if (AxisHor > 0)
+            else if (AxisInput.x > 0)
             {
-                playerSprite.transform.localEulerAngles = new Vector3(0, 0, 0);
+                transform.eulerAngles = new Vector3(0, 0, Mathf.Asin((transform.position.x - rope.connectedAnchor.x) / rope.distance) * 180f / Mathf.PI);
+                faceingDir = 1;
             }
-      
-      
+            if (Input.GetAxisRaw("Horizontal") == 0)
+            {
+                AxisInput.x = 0;
+            }
         }
         else
         {
-            if (AxisHor < 0)
+            //moveing animation control
+            if (AxisInput.x < 0)
             {
                 transform.eulerAngles = new Vector3(0, 180, transform.eulerAngles.z);
                 playerAnimator.SetBool("isMoveing", true);
                 faceingDir = -1;
             }
-            else if (AxisHor > 0)
+            else if (AxisInput.x > 0)
             {
                 transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
                 playerAnimator.SetBool("isMoveing", true);
@@ -80,15 +85,20 @@ public class PlayerControler : MonoBehaviour, IdamageAble
             }
             if (Input.GetAxisRaw("Horizontal") == 0)
             {
-                AxisHor = 0;
+                AxisInput.x = 0;
                 playerAnimator.SetBool("isMoveing", false);
             }
 
-            playerAnimator.SetFloat("speed", AxisHor * speed);
+            playerAnimator.SetFloat("speed", AxisInput.x * speed);
         }
         if (Input.GetButtonDown("Jump") && (isGrounded || isSwinging))
         {
             jump();
+        }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            rb2D.velocity = new Vector2(rb2D.velocity.x, 0f);
         }
 
         if ((Input.GetKeyDown(KeyCode.X) || Input.GetButtonDown("Fire1")) && Input.GetKey(KeyCode.C) == false)
@@ -132,7 +142,8 @@ public class PlayerControler : MonoBehaviour, IdamageAble
         {
             if (isSwinging)
             {
-                //swingMovement();
+                swingMovement();
+
                 // playerSprite.transform.eulerAngles = new Vector3(playerSprite.transform.eulerAngles.x, playerSprite.transform.eulerAngles.y, Mathf.Atan((rope.anchor.x / rope.anchor.y)) * 180 / Mathf.PI);
             }
             else
@@ -148,7 +159,7 @@ public class PlayerControler : MonoBehaviour, IdamageAble
 
     void movement()
     {
-        rb2D.velocity = new Vector2(AxisHor * speed, rb2D.velocity.y);
+        rb2D.velocity = new Vector2(AxisInput.x * speed, rb2D.velocity.y);
     }
 
     void falling()
@@ -159,21 +170,57 @@ public class PlayerControler : MonoBehaviour, IdamageAble
         else
         { isFalling = false; }
 
-        if (rb2D.velocity.y < -30f)
+        if (rb2D.velocity.y < -25f)
         {
-            rb2D.velocity = new Vector2(rb2D.velocity.x, -30f);
+            rb2D.velocity = new Vector2(rb2D.velocity.x, -25f);
         }
 
     }
 
     void swingMovement()
     {
+        if (AxisInput.x < 0)
+        {
+            rb2D.AddForce(new Vector2(swingForse * -1f, 0));
+        }
+        else if (AxisInput.x > 0)
+        {
+            rb2D.AddForce(new Vector2(swingForse, 0));
+        }
+        if (AxisInput.x == 0)
+        {
+            swingBrakeing();
+        }
 
-        motor2D.motorSpeed = -AxisHor * swingSpeed;
-        motor2D.maxMotorTorque = rope.motor.maxMotorTorque;
-        rope.motor = motor2D;
+        //angle
+        if (faceingDir == 1)
+        {
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, Mathf.Asin((transform.position.x - rope.connectedAnchor.x) / rope.distance) * 180f / Mathf.PI);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, -1 * Mathf.Asin((transform.position.x - rope.connectedAnchor.x) / rope.distance) * 180f / Mathf.PI);
+        }
 
+        //climbing
+        rope.distance -= AxisInput.y * ropeClimbSpeed;
 
+    }
+
+    void swingBrakeing()
+    {
+        if (rb2D.velocity.x < 0.1 && rb2D.velocity.x > -0.1)
+        {
+
+        }
+        else if (rb2D.velocity.x > 0.1)
+        {
+            rb2D.AddForce(new Vector2(swingBreakingForse * -1f, 0));
+        }
+        else
+        {
+            rb2D.AddForce(new Vector2(swingBreakingForse, 0));
+        }
     }
 
     void throwSpear()
@@ -211,8 +258,7 @@ public class PlayerControler : MonoBehaviour, IdamageAble
     {
         hook.GetComponent<GraplingHook>().findNearestGrabPlace();
         rope.connectedAnchor = hook.GetComponent<GraplingHook>().nearestGrabPlace.transform.position;
-        rope.anchor = hook.GetComponent<GraplingHook>().nearestGrabPlace.transform.position - transform.position;
-
+        rope.distance = Vector2.Distance(transform.position, hook.GetComponent<GraplingHook>().nearestGrabPlace.transform.position);
 
 
         startSwinging();
@@ -222,11 +268,10 @@ public class PlayerControler : MonoBehaviour, IdamageAble
     {
         // here set rotation (head point grapplac
         rb2D.freezeRotation = false;
-        playerSprite.transform.localEulerAngles = new Vector3(0, transform.eulerAngles.y);
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, Mathf.Atan((rope.anchor.x / rope.anchor.y)) * -180 / Mathf.PI);
-        Time.timeScale = 0.02f;
         isSwinging = true;
         rope.enabled = true;
+        playerAnimator.SetBool("isMoveing", false);
+        playerAnimator.SetFloat("speed", 0f);
     }
 
 
@@ -236,5 +281,6 @@ public class PlayerControler : MonoBehaviour, IdamageAble
         rope.enabled = false;
         rb2D.freezeRotation = true;
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+
     }
 }
